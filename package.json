@@ -1,0 +1,36 @@
+{
+  "name": "esbern-org-client",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "lint": "eslint --fix",
+    "build": "vue-tsc --noEmit && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@mdi/font": "7.4.47",
+    "axios": "1.7.7",
+    "dayjs": "1.11.13",
+    "pinia": "2.2.2",
+    "roboto-fontface": "0.10.0",
+    "vue": "3.5.9",
+    "vue-router": "4.4.5",
+    "vuetify": "3.7.2"
+  },
+  "devDependencies": {
+    "@eslint/js": "9.11.1",
+    "@stylistic/eslint-plugin": "2.8.0",
+    "@types/node": "22.7.3",
+    "@vitejs/plugin-vue": "5.1.4",
+    "eslint": "9.11.1",
+    "eslint-plugin-vue": "9.28.0",
+    "typescript": "5.6.2",
+    "typescript-eslint": "8.7.0",
+    "unplugin-fonts": "1.1.1",
+    "unplugin-vue-components": "0.27.4",
+    "vite": "5.4.8",
+    "vite-plugin-vuetify": "2.0.4",
+    "vue-tsc": "2.1.6"
+  }
+}
