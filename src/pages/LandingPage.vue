@@ -115,5 +115,14 @@
       <li>PCI Compliance</li>
       <li>Hardlines Retail</li>
     </ul>
+    <h3 class="my-4">
+      This site is open source!
+    </h3>
+    <ul class="ml-8">
+      <li><a href="https://github.com/commgdog/esbern-org-client">Client project GitHub</a></li>
+      <li><a href="https://github.com/commgdog/esbern-org-server">Server project GitHub</a></li>
+    </ul>
   </v-container>
 </template>
+<script setup lang="ts">
+</script>
