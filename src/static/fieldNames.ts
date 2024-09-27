@@ -9,6 +9,7 @@ export default <Record<string, string>>{
   email: 'Email',
   firstName: 'First Name',
   lastName: 'Last Name',
+  timezone: 'Timezone',
   theme: 'Theme',
   homePage: 'Home Page',
   isInactive: 'Inactive',

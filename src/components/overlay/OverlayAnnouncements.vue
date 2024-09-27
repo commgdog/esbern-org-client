@@ -49,16 +49,15 @@
       >
         <v-list-item-title class="d-flex align-center text-h6 pa-4">
           {{ row.title }}
+          <v-spacer />
           <v-chip
             v-if="!row.isRead"
             color="error"
-            size="small"
-            append-icon="mdi-alert-decagram-outline"
-            class="ml-2"
+            size="x-small"
+            class="mr-2"
           >
             Unread
           </v-chip>
-          <v-spacer />
           <v-btn
             v-if="!row.isRead"
             variant="text"
@@ -78,7 +77,7 @@
           </v-chip>
         </v-list-item-title>
         <v-list-item-subtitle class="px-4 mt-n4">
-          {{ formatDate('dddd, MMM D, YYYY', row.announceAt) }}
+          {{ datetimeToLocal(row.announceAt).format('dddd, MMM D, YYYY') }}
         </v-list-item-subtitle>
         <p class="text-medium-emphasis pa-4">
           {{ row.body }}
@@ -98,7 +97,7 @@
 <script setup lang="ts">
 import { onMounted, ref, watch } from 'vue';
 import useSession from '@/stores/session.js';
-import { formatDate } from '@/services/date.js';
+import { datetimeToLocal } from '@/services/datetime.js';
 import api from '@/services/api.js';
 import { storeToRefs } from 'pinia';
 

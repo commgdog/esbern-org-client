@@ -7,6 +7,7 @@ The client-side (web) interface for esbern.org.
 * [The server project set up](https://github.com/commgdog/esbern-org-server)
 
 ## Installation
+
 #### Project
 ```
 # Clone the repository
@@ -73,6 +74,12 @@ This value will also be used when building the project.
     +-- static - Static data files
     +-- stores - Pinia stores
 ```
+
+## Date and Time
+This project includes a wrapper utility for managing dates and times. There is a service wrapper in
+`src/services/datetime.ts` that you should utilize for date and time functionality. All date and time
+values on the server-side are in `UTC` whereas the client must translate from `UTC` to their respective
+timezone saved on their account.
 
 ## Theming
 * Primary Color: #1867C0

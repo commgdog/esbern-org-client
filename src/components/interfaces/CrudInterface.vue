@@ -5,6 +5,7 @@
     :model-name="modelName"
     :api-path="apiPath"
     :model-id="modelId"
+    :form-translations="formTranslations"
     @update-list="handleUpdateList"
     @create-opened="handleCreateOpened"
   >
@@ -59,6 +60,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import useSession from '@/stores/session.js';
+import { FormTranslation } from '@/components/crud/CrudForm.vue';
 
 const session = useSession();
 
@@ -70,8 +72,10 @@ withDefaults(defineProps<{
   apiPath: string;
   modelIdKey: string;
   filter?: (row: Record<string, unknown>) => boolean;
+  formTranslations?: Record<string, FormTranslation>;
 }>(), {
   filter: () => true,
+  formTranslations: () => ({}),
 });
 
 const modelId = ref<string | null>(null);

@@ -38,6 +38,13 @@
         :error-messages="crud.getErrors('lastName')"
       />
       <v-select
+        v-model="form.timezone"
+        :items="timezones"
+        :disabled="crud.isWriting"
+        :readonly="crud.isReadOnly"
+        label="Timezone"
+      />
+      <v-select
         v-model="form.theme"
         :items="themes"
         :disabled="crud.isWriting"
@@ -165,6 +172,7 @@
 import { computed, nextTick, ref, watch } from 'vue';
 import useSession from '@/stores/session.js';
 import { storeToRefs } from 'pinia';
+import { timezones } from '@/static/timezones.js';
 import themes from '@/static/themes.js';
 import homePages from '@/static/homePages.js';
 
@@ -199,6 +207,7 @@ const form = ref({
   passwordIsExpired: false,
   firstName: '',
   lastName: '',
+  timezone: 'UTC',
   theme: 'light',
   homePage: 'dashboard',
   isInactive: false,

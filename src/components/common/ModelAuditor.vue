@@ -74,8 +74,8 @@
               </template>
               <template #opposite>
                 <v-layout class="flex-column text-caption align-end text-no-wrap">
-                  <div>{{ formatDate('MMM D, YYYY', audit.timestamp) }}</div>
-                  <div>{{ formatDate('h:mm A', audit.timestamp) }}</div>
+                  <div>{{ datetimeToLocal(audit.timestamp).format('MMM D, YYYY') }}</div>
+                  <div>{{ datetimeToLocal(audit.timestamp).format('h:mm A') }}</div>
                 </v-layout>
               </template>
               <h4>
@@ -171,7 +171,7 @@
 import { ref, watch } from 'vue';
 import { useDisplay } from 'vuetify';
 import api from '@/services/api.js';
-import { formatDate } from '@/services/date.js';
+import { datetimeToLocal } from '@/services/datetime.js';
 import { permissionDescriptions } from '@/static/permission.js';
 import fieldNames, { dateFields } from '@/static/fieldNames.js';
 
@@ -250,7 +250,7 @@ const formatArrayField = (field: string, value: string) => {
 
 const formatChangedValue = (field: string, value: string) => {
   if (dateFields.indexOf(field) !== -1) {
-    return formatDate('MMM D, YYYY h:mm A', value);
+    return datetimeToLocal(value).format('MMM D, YYYY h:mm A');
   }
   return value;
 };

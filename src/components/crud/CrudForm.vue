@@ -136,11 +136,19 @@ const emit = defineEmits(['createOpened', 'updateList']);
 const isVisible = defineModel<boolean>('isVisible', { required: true });
 const form = defineModel<object>('form', { required: true });
 
-const props = defineProps<{
+export type FormTranslation = {
+  from: (value: unknown) => unknown;
+  to: (value: unknown) => unknown;
+};
+
+const props = withDefaults(defineProps<{
   modelName: string;
   apiPath: string;
   modelId: string | null;
-}>();
+  formTranslations?: Record<string, FormTranslation>;
+}>(), {
+  formTranslations: () => ({}),
+});
 
 const { hasPermission } = useSession();
 const basePermissionName = props.modelName.toUpperCase().replaceAll(' ', '_');
@@ -213,6 +221,17 @@ const reset = () => {
   }, 250);
 };
 
+const translateForm = (toTranslate: object, direction: 'from' | 'to') => {
+  const formCopy: Record<string, unknown> = { ...toTranslate };
+  const fieldsWithTranslation = Object.keys(props.formTranslations);
+  Object.keys(formCopy).forEach((key) => {
+    if (fieldsWithTranslation.indexOf(key) !== -1) {
+      formCopy[key] = props.formTranslations[key][direction](formCopy[key]);
+    }
+  });
+  return formCopy;
+};
+
 const runRead = () => {
   resetController();
   resetErrors();
@@ -226,8 +245,9 @@ const runRead = () => {
     signal: controller.signal,
   })
     .then((response) => {
-      Object.assign(form.value, response.data);
-      Object.assign(formCache.value, response.data);
+      const translation = translateForm(response.data, 'from');
+      Object.assign(form.value, translation);
+      Object.assign(formCache.value, translation);
     })
     .catch(() => {
       hasError.value = true;
@@ -241,7 +261,7 @@ const runCreate = () => {
   resetController();
   resetErrors();
   publicState.isWriting = true;
-  api.post(`/${props.apiPath}`, { ...form.value }, {
+  api.post(`/${props.apiPath}`, translateForm(form.value, 'to'), {
     signal: controller.signal,
   })
     .then(() => {
@@ -268,7 +288,7 @@ const runUpdate = () => {
   resetController();
   resetErrors();
   publicState.isWriting = true;
-  api.patch(`/${props.apiPath}/${props.modelId}`, { ...form.value }, {
+  api.patch(`/${props.apiPath}/${props.modelId}`, translateForm(form.value, 'to'), {
     signal: controller.signal,
   })
     .then(() => {

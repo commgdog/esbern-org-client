@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia';
 import { computed, ref } from 'vue';
 import api from '@/services/api.js';
+import datetime, { setTimezone } from '@/services/datetime.js';
 
 export default defineStore('session', () => {
   let controller = new AbortController();
@@ -20,6 +21,7 @@ export default defineStore('session', () => {
     firstName: null as string | null,
     lastName: null as string | null,
     passwordIsExpired: false,
+    timezone: 'UTC',
     theme: 'light',
     homePage: 'dashboard',
     permissions: [] as string[],
@@ -46,12 +48,11 @@ export default defineStore('session', () => {
 
   const setRedirectTimeout = () => {
     if (exists.value && sessionData.value.tokenExpires !== null) {
-      const expiresTime = new Date(sessionData.value.tokenExpires).getTime();
-      const currentTime = new Date().getTime();
-      if (expiresTime > currentTime) {
+      const tokenExpires = datetime(sessionData.value.tokenExpires);
+      if (datetime().isBefore(tokenExpires)) {
         redirectTimeout = setTimeout(async () => {
           document.location.href = `/sign-in?redirect=${document.location.pathname}`;
-        }, expiresTime - currentTime);
+        }, Math.abs(datetime().diff(tokenExpires)));
       } else {
         clearTimeout(redirectTimeout);
       }
@@ -62,6 +63,7 @@ export default defineStore('session', () => {
 
   const setSession = (data: object) => {
     Object.assign(sessionData.value, data);
+    setTimezone(sessionData.value.timezone);
   };
 
   const readSession = async () => {

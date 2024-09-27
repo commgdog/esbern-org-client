@@ -4,10 +4,11 @@
     model-name="Announcement"
     api-path="announcement"
     model-id-key="announcementId"
+    :form-translations="formTranslations"
   >
     <template #form="{ crud }">
       <v-alert
-        v-if="dateInPast(form.expiresAt)"
+        v-if="datetime().isAfter(form.expiresAt)"
         class="mb-4"
         type="warning"
       >
@@ -81,14 +82,14 @@
       </v-list-item-title>
       <v-list-item-subtitle>
         Shown from
-        {{ formatDate('M/D/YY', row.announceAt) }}
+        {{ datetimeToLocal(row.announceAt).format('M/D/YY') }}
         to
-        {{ formatDate('M/D/YY', row.expiresAt) }}
+        {{ datetimeToLocal(row.expiresAt).format('M/D/YY') }}
       </v-list-item-subtitle>
     </template>
     <template #list-row-append="{ row }: { row: ListRow }">
       <v-chip
-        v-if="dateInPast(row.expiresAt)"
+        v-if="datetime().isAfter(row.expiresAt)"
         size="small"
         color="warning"
         class="ml-2"
@@ -101,7 +102,8 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import { dateInPast, formatDate } from '@/services/date.js';
+import datetime, { datetimeFromLocal, datetimeToLocal } from '@/services/datetime.js';
+import { FormTranslation } from '@/components/crud/CrudForm.vue';
 
 type ListRow = {
   title: string;
@@ -117,12 +119,22 @@ const form = ref({
   body: '',
 });
 
+const formTranslations: Record<string, FormTranslation> = {
+  announceAt: {
+    from: (value: unknown) => datetimeToLocal(value as string).format('YYYY-MM-DD HH:mm'),
+    to: (value: unknown) => datetimeFromLocal(value as string).utc().format('YYYY-MM-DD HH:mm'),
+  },
+  expiresAt: {
+    from: (value: unknown) => datetimeToLocal(value as string).format('YYYY-MM-DD HH:mm'),
+    to: (value: unknown) => datetimeFromLocal(value as string).utc().format('YYYY-MM-DD HH:mm'),
+  },
+};
+
 const setAnnounceAtNow = () => {
-  form.value.announceAt = formatDate('YYYY-MM-DD HH:mm', new Date());
+  form.value.announceAt = datetimeToLocal().format('YYYY-MM-DD HH:mm');
 };
 
 const setExpiresAtEod = () => {
-  const date = new Date().setHours(23, 59);
-  form.value.expiresAt = formatDate('YYYY-MM-DD HH:mm', new Date(date));
+  form.value.expiresAt = datetimeToLocal(datetimeToLocal().hour(23).minute(59)).format('YYYY-MM-DD HH:mm');
 };
 </script>
