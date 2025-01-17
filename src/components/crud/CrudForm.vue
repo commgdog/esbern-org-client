@@ -127,9 +127,9 @@
 
 <script setup lang="ts">
 import { computed, onMounted, reactive, ref, watch } from 'vue';
-import api, { parseErrorResponse } from '@/services/api.js';
-import useSession from '@/stores/session.js';
-import Permission from '@/static/permission.js';
+import api, { parseErrorResponse } from '../../../../esbern-org-client/src/services/api.js';
+import useSession from '../../../../esbern-org-client/src/stores/session.js';
+import Permission from '../../../../esbern-org-client/src/static/permission.js';
 
 const emit = defineEmits(['createOpened', 'updateList']);
 

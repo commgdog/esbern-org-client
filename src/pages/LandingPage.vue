@@ -98,9 +98,10 @@
     <ul class="ml-8">
       <li>AWS (EC2, VPC, S3, Route 53)</li>
       <li>PHP / LAMP Stack</li>
-      <li>TypeScript / JavaScript / Node.js</li>
+      <li>TypeScript / JavaScript / Node.js / Electron</li>
       <li>MySQL / MariaDB</li>
       <li>Vue.js / Vuetify</li>
+      <li>Git / JetBrains / SSH</li>
     </ul>
     <h3 class="my-4">
       Areas of Expertise:
@@ -113,6 +114,7 @@
       <li>Epicor Eagle</li>
       <li>Stripe</li>
       <li>PCI Compliance</li>
+      <li>Web Scraping & Reverse Engineering</li>
       <li>Hardlines Retail</li>
     </ul>
     <h3 class="my-4">
