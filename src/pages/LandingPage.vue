@@ -61,23 +61,23 @@
     </h3>
     <p class="mb-3">
       I'm a software developer based in the San Francisco Bay Area, specializing in retail IT systems and compliance.
-      With a focus on streamlining operations, I help businesses drive growth through tailored technology solutions.
+      With a focus on making operations more efficient, I help businesses drive growth through technology.
     </p>
     <h3 class="mt-4">
       Current Role
     </h3>
     <p class="mb-3">
-      Since 2019, I’ve partnered with Walnut Creek Hardware to develop <strong>OmniOrder</strong>, an order management
+      Since 2019, I’ve partnered with Walnut Creek Hardware to develop <strong>Omni</strong>, an order management
       add-on designed specifically for Ace Hardware retail stores. As the principal developer, I oversee its ongoing
-      development and optimization, continually enhancing its features to support seamless retail operations.
+      development and optimization.
     </p>
     <h3 class="mt-4">
       Previous Experience
     </h3>
     <p class="mb-3">
       From 2014 to 2019, I worked as a freelance IT consultant within the hardlines retail industry. During this time, I
-      delivered custom software solutions, managed systems, and implemented IT and network infrastructure to enable
-      efficient business operations.
+      delivered custom software solutions, managed systems, and implemented IT and network infrastructure to bring dated
+      businesses technologies into the current century.
     </p>
     <p class="mb-3">
       Before that, from 2009 to 2012, I held various roles at Walnut Creek Hardware, ranging from stocking shelves and
